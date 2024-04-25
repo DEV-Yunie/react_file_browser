@@ -1,18 +1,24 @@
 import { Box, Grid } from "@mui/material"
 import File from "./File"
 import { FileTypeProps } from "../types/file.types"
+import styled from "styled-components";
+
+const GridContainer = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(96px, 1fr));
+`;
 export default function FileGrid({ files }: FileTypeProps) {
   return (
-    <Grid container spacing={2}>
+    <GridContainer>
       {
         files.map((file: any, idx: number) => {
           return (
-            <Grid item>
               <File name={file.name} isDir={file.isDir} />
-            </Grid>
           )
         })
       }
-    </Grid>
+    </GridContainer>
   )
 }

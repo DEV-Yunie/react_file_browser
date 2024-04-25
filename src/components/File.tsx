@@ -1,14 +1,14 @@
 import { Box, Typography } from "@mui/material";
-import FolderIcon from '@mui/icons-material/Folder';
-import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import { FileType } from "../types/file.types";
 export default function File({ name, isDir }: FileType) {
   return (
-    <Box sx={{ width: '100%'}}>
+    <div>
       {
-        isDir ? <FolderIcon /> : <InsertDriveFileIcon />
+        isDir ? <FolderOutlinedIcon sx={{ width: '100px', height: '100px'}}/> : <InsertDriveFileOutlinedIcon sx={{ width: '100px', height: '100px'}}/>
       }
-      <Typography>{name}</Typography>
-    </Box>
+      <Typography sx={{ textAlign: "center"}}>{name}</Typography>
+    </div>
   )
 }
