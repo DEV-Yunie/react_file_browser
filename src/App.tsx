@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import FileBrowser from './components/FileBrowser';
+import { ContextMenuProvider } from './context/ContextMenu';
 
 let data = {
   "fileData" : [
@@ -14,7 +15,9 @@ let data = {
 let folderPath = "/var/users/homes"
 function App() {
   return (
-    <FileBrowser fileData={data.fileData} folderPath={folderPath}/>
+    <ContextMenuProvider>
+      <FileBrowser fileData={data.fileData} folderPath={folderPath}/>
+    </ContextMenuProvider>
   );
 }
 
