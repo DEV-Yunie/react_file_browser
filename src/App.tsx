@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
-import FileBrowser from './components/FileBrowser';
-import { ContextMenuProvider } from './context/ContextMenu';
+import { FileRoot } from "./components/FileRoot";
 
 let data = {
   "fileData" : [
@@ -15,9 +13,7 @@ let data = {
 let folderPath = "/var/users/homes"
 function App() {
   return (
-    <ContextMenuProvider>
-      <FileBrowser fileData={data.fileData} folderPath={folderPath}/>
-    </ContextMenuProvider>
+    <FileRoot fileData={data.fileData} folderPath={folderPath}/>
   );
 }
 

@@ -3,7 +3,7 @@ import { MenuContext } from "../context/ContextMenu";
 import { Menu, MenuItem } from "@mui/material";
 
 export default function FileContextMenu() {
-  const { menu, handleContextMenuClose } = useContext(MenuContext);
+  const { clickTarget, menu, handleContextMenuClose } = useContext(MenuContext);
 
   return (
     <Menu open={menu !== null}
@@ -14,10 +14,9 @@ export default function FileContextMenu() {
           ? { top: menu.mouseY, left: menu.mouseX }
           : undefined
       }>
-      <MenuItem onClick={handleContextMenuClose}>Copy</MenuItem>
-      <MenuItem onClick={handleContextMenuClose}>Print</MenuItem>
-      <MenuItem onClick={handleContextMenuClose}>Highlight</MenuItem>
-      <MenuItem onClick={handleContextMenuClose}>Email</MenuItem>
+      { clickTarget === 'File' ? <MenuItem onClick={handleContextMenuClose}>Delete</MenuItem> : null}
+      <MenuItem onClick={handleContextMenuClose}>Add Folder</MenuItem>
+      <MenuItem onClick={handleContextMenuClose}>Info</MenuItem>
     </Menu>
   )
 }

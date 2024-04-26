@@ -1,12 +1,14 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import FolderOutlinedIcon from '@mui/icons-material/FolderOutlined';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import { FileType } from "../types/file.types";
-import React from "react";
-export default function File({ name, isDir }: FileType) {
+import { useContext } from "react";
+import { MenuContext } from "../context/ContextMenu";
 
+export default function File({ name, isDir }: FileType) {
+  const { handleContextMenuOpen } = useContext(MenuContext);
   return (
-    <div >
+    <div onContextMenu={ handleContextMenuOpen } className="file-box">
       {
         isDir ? <FolderOutlinedIcon sx={{ width: '100px', height: '100px'}}/> : <InsertDriveFileOutlinedIcon sx={{ width: '100px', height: '100px'}}/>
       }

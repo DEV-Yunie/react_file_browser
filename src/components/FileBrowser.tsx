@@ -1,17 +1,20 @@
+import { useContext, useState } from "react";
+
 import { Box, Stack } from "@mui/material";
+
 import FileList from "./FileList";
 import FileToolbar from "./FileToolbar";
-import { FileBrowserProps } from "../types/filebrowser.types";
-import { useContext, useState } from "react";
 import FileGrid from "./FileGrid";
 import FileContextMenu from "./FileContextMenu";
+
 import { MenuContext } from "../context/ContextMenu";
+import { FileBrowserProps } from "../types/filebrowser.types";
 
 type ShowType = 'list' | 'grid';
 
-export default function FileBrowser({ fileData, folderPath }: FileBrowserProps) {
+export default function FileBrowser({ folderPath, fileData }:FileBrowserProps) {
   const [fileShowState, setFileShowState] = useState<ShowType>('grid');
-  const { handleClick, handleContextMenuOpen } = useContext(MenuContext);
+  const { handleContextMenuOpen } = useContext(MenuContext);
 
   const handleShowListFile = () => {
     setFileShowState('list');
