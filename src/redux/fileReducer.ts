@@ -12,7 +12,9 @@ const fileDataSlice = createSlice({
       console.log(state.value, action);
     },
     sortFile: (state, action) => {
-      console.log(action.payload)
+      state.value.sort((a: FileType, b: FileType) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+      console.log(state.value);
+      console.log(action);
     },
     deleteFile: (state, action) => {
       console.log(action.payload)

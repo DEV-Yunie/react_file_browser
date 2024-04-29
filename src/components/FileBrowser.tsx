@@ -38,7 +38,8 @@ export default function FileBrowser({ folderPath, fileData }:FileBrowserProps) {
 
   useEffect(() => {
     dispatch(setFiles(fileData));
-  }, [])
+  }, []);
+  
   return (
     <Box height={500} width={1000} p={2} sx={{ border: '1px solid grey', borderRadius: '4px' }}>
       <Stack sx={{ height: '100%'}}>

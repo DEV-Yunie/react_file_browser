@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { useContext, useState } from "react";
 import { FileDataContext } from "../context/FileDataContext";
 import { useDispatch } from "react-redux";
+import { sortFile } from "../redux/fileReducer";
 
 const ToolbarContainer = styled.div`
   display: flex;
@@ -31,10 +32,10 @@ const FilePathInput = styled.div`
 // type TagType = 'name' | 'date' | 'size';
 // type OrderType = 'asc' | 'desc';
 export default function FileToolbar({ folderPath, handleShowListFile, handleShowGridFile }: FileToolbarProps) {
-
-  const { handleSortFilesByName } = useContext(FileDataContext)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const dispatch = useDispatch();
   const handleClickSort = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -59,7 +60,7 @@ export default function FileToolbar({ folderPath, handleShowListFile, handleShow
           MenuListProps={{
             'aria-labelledby': 'basic-button',
           }}>
-          <MenuItem onClick={handleSortFilesByName} data-tag="name">
+          <MenuItem onClick={() => dispatch(sortFile('name'))} data-tag="name">
             Sort By Name
           </MenuItem>
           <MenuItem  data-tag="date">
