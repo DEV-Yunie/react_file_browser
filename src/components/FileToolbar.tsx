@@ -1,11 +1,16 @@
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import { FaArrowTurnUp } from "react-icons/fa6";
 import HomeIcon from '@mui/icons-material/Home';
 import ListIcon from '@mui/icons-material/List';
 import AppsIcon from '@mui/icons-material/Apps';
 import SortIcon from '@mui/icons-material/Sort';
+// import { FaSortAmountUpAlt } from "react-icons/fa";
+// import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FileToolbarProps } from "../types/filetoolbar.types";
 import styled from "styled-components";
+import { useContext, useState } from "react";
+import { FileDataContext } from "../context/FileDataContext";
+import { useDispatch } from "react-redux";
 
 const ToolbarContainer = styled.div`
   display: flex;
@@ -22,20 +27,49 @@ const FilePathInput = styled.div`
   align-items: center;
   flex-grow: 10;
 `;
+
+// type TagType = 'name' | 'date' | 'size';
+// type OrderType = 'asc' | 'desc';
 export default function FileToolbar({ folderPath, handleShowListFile, handleShowGridFile }: FileToolbarProps) {
 
+  const { handleSortFilesByName } = useContext(FileDataContext)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClickSort = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClickHome = () => {}
+
+  const handleClickUpPath = () => {}
   return (
     <ToolbarContainer>
       <div>
-        <IconButton><HomeIcon /></IconButton>
-        <IconButton><FaArrowTurnUp/></IconButton>
+        <IconButton onClick={handleClickHome}><HomeIcon /></IconButton>
+        <IconButton onClick={handleClickUpPath}><FaArrowTurnUp /></IconButton>
       </div>
-       <FilePathInput>{folderPath}</FilePathInput>
-       <div>
-          <IconButton onClick={handleShowListFile}><ListIcon /></IconButton>
-          <IconButton onClick={handleShowGridFile}><AppsIcon /></IconButton>
-          <IconButton><SortIcon/></IconButton>
-       </div>
+      <FilePathInput>{folderPath}</FilePathInput>
+      <div>
+        <IconButton onClick={handleShowListFile}><ListIcon /></IconButton>
+        <IconButton onClick={handleShowGridFile}><AppsIcon /></IconButton>
+        <IconButton onClick={handleClickSort}><SortIcon /></IconButton>
+        <Menu id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={() => { setAnchorEl(null); }}
+          MenuListProps={{
+            'aria-labelledby': 'basic-button',
+          }}>
+          <MenuItem onClick={handleSortFilesByName} data-tag="name">
+            Sort By Name
+          </MenuItem>
+          <MenuItem  data-tag="date">
+            Sort By Date
+          </MenuItem>
+          <MenuItem  data-tag="size">
+            Sort By Size
+          </MenuItem>
+        </Menu>
+      </div>
     </ToolbarContainer>
   )
 }

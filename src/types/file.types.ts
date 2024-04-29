@@ -6,5 +6,5 @@ export interface FileType {
 }
 
 export interface FileTypeProps {
-  files: FileType[];
+  files: FileType[] | null;
 }

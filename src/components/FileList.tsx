@@ -10,7 +10,7 @@ export default function FileList({ files }: FileTypeProps) {
   return (
     <List>
       {
-        files.map((file: FileType, index: number) => {
+        files?.map((file: FileType, index: number) => {
           return (
             <div onContextMenu={ handleContextMenuOpen } className="file-box">
             <ListItem>

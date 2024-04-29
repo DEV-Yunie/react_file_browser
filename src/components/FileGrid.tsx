@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material"
+// import { Box, Grid } from "@mui/material"
 import File from "./File"
 import { FileTypeProps } from "../types/file.types"
 import styled from "styled-components";
@@ -13,7 +13,7 @@ export default function FileGrid({ files }: FileTypeProps) {
   return (
     <GridContainer>
       {
-        files.map((file: any, idx: number) => {
+        files?.map((file: any, idx: number) => {
           return (
               <File name={file.name} isDir={file.isDir} />
           )
