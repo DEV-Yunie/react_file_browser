@@ -7,11 +7,13 @@ interface Props {
 
 const MenuContext = createContext<{
   clickTarget: string | null;
+  targetID: string,
   menu: { mouseX: number; mouseY: number } | null; // null 또는 객체를 허용하는 타입으로 변경
   handleContextMenuClose: () => void;
   handleContextMenuOpen: (event: React.MouseEvent) => void;
 }>({
   clickTarget: null,
+  targetID: '',
   menu: null,
   handleContextMenuClose: () => { },
   handleContextMenuOpen: (event: React.MouseEvent) => { }
@@ -20,6 +22,7 @@ const MenuContext = createContext<{
 const ContextMenuProvider = ({ children }: Props): JSX.Element => {
   const [clickTarget, setClickTarget] = useState<string | null>(null);
   const [menu, setMenu] = useState<{ mouseX: number; mouseY: number } | null>(null);
+  const [targetID, setTargetID] = useState<string>('');
 
   const handleContextMenuClose = () => {
     setMenu(null);
@@ -30,7 +33,8 @@ const ContextMenuProvider = ({ children }: Props): JSX.Element => {
     event.stopPropagation();
     console.log(event.currentTarget);
     if (event.currentTarget.className === 'file-box') {
-      setClickTarget('File')
+      setClickTarget('File');
+      setTargetID(event.currentTarget.id);
     } else {
       setClickTarget('Back')
     }
@@ -42,7 +46,7 @@ const ContextMenuProvider = ({ children }: Props): JSX.Element => {
     )
   }
   return (
-    <MenuContext.Provider value={{ clickTarget, menu, handleContextMenuClose, handleContextMenuOpen }}>
+    <MenuContext.Provider value={{ clickTarget, menu, targetID, handleContextMenuClose, handleContextMenuOpen }}>
       {children}
     </MenuContext.Provider>
   )

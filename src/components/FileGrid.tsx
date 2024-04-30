@@ -15,7 +15,7 @@ export default function FileGrid({ files }: FileTypeProps) {
       {
         files?.map((file: any, idx: number) => {
           return (
-              <File name={file.name} isDir={file.isDir} />
+              <File key={file.id} name={file.name} isDir={file.isDir} id={file.id} />
           )
         })
       }

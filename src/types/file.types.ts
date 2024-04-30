@@ -1,8 +1,10 @@
 export interface FileType {
+  id: string;
   name: string;
 
   isDir?: boolean;
-  modifyData?: Date | string;
+  size?: number;
+  modifyDate?: Date | string;
 }
 
 export interface FileTypeProps {

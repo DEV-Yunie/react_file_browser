@@ -8,8 +8,7 @@ import SortIcon from '@mui/icons-material/Sort';
 // import { FaSortAmountDownAlt } from "react-icons/fa";
 import { FileToolbarProps } from "../types/filetoolbar.types";
 import styled from "styled-components";
-import { useContext, useState } from "react";
-import { FileDataContext } from "../context/FileDataContext";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { sortFile } from "../redux/fileReducer";
 
@@ -29,8 +28,6 @@ const FilePathInput = styled.div`
   flex-grow: 10;
 `;
 
-// type TagType = 'name' | 'date' | 'size';
-// type OrderType = 'asc' | 'desc';
 export default function FileToolbar({ folderPath, handleShowListFile, handleShowGridFile }: FileToolbarProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -63,10 +60,10 @@ export default function FileToolbar({ folderPath, handleShowListFile, handleShow
           <MenuItem onClick={() => dispatch(sortFile('name'))} data-tag="name">
             Sort By Name
           </MenuItem>
-          <MenuItem  data-tag="date">
+          <MenuItem onClick={() => dispatch(sortFile('date'))} data-tag="date">
             Sort By Date
           </MenuItem>
-          <MenuItem  data-tag="size">
+          <MenuItem onClick={() => dispatch(sortFile('size'))} data-tag="size">
             Sort By Size
           </MenuItem>
         </Menu>

@@ -12,12 +12,12 @@ export default function FileList({ files }: FileTypeProps) {
       {
         files?.map((file: FileType, index: number) => {
           return (
-            <div onContextMenu={ handleContextMenuOpen } className="file-box">
-            <ListItem>
-              <ListItemIcon>{file.isDir ? <FolderIcon /> : <InsertDriveFileIcon />}</ListItemIcon>
-              <ListItemText>{file.name}</ListItemText>
-            </ListItem>
-            <Divider />
+            <div onContextMenu={handleContextMenuOpen} className="file-box" key={file.id} id={file.id}>
+              <ListItem>
+                <ListItemIcon>{file.isDir ? <FolderIcon /> : <InsertDriveFileIcon />}</ListItemIcon>
+                <ListItemText>{file.name}</ListItemText>
+              </ListItem>
+              <Divider />
             </div>
           )
         })

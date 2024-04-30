@@ -5,10 +5,10 @@ import { FileType } from "../types/file.types";
 import { useContext } from "react";
 import { MenuContext } from "../context/ContextMenu";
 
-export default function File({ name, isDir }: FileType) {
+export default function File({ id, name, isDir }: FileType) {
   const { handleContextMenuOpen } = useContext(MenuContext);
   return (
-    <div onContextMenu={ handleContextMenuOpen } className="file-box">
+    <div onContextMenu={ handleContextMenuOpen } className="file-box" id={id}>
       {
         isDir ? <FolderOutlinedIcon sx={{ width: '100px', height: '100px'}}/> : <InsertDriveFileOutlinedIcon sx={{ width: '100px', height: '100px'}}/>
       }
