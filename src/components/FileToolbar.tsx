@@ -9,8 +9,10 @@ import SortIcon from '@mui/icons-material/Sort';
 import { FileToolbarProps } from "../types/filetoolbar.types";
 import styled from "styled-components";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { sortFile } from "../redux/fileReducer";
+import { moveHome, moveUp } from "../redux/folderReducer";
+import { RootState } from "../redux/store";
 
 const ToolbarContainer = styled.div`
   display: flex;
@@ -33,17 +35,16 @@ export default function FileToolbar({ folderPath, handleShowListFile, handleShow
   const open = Boolean(anchorEl);
 
   const dispatch = useDispatch();
+  const folderName = useSelector((state: RootState) =>  state.folderData.value);
+
   const handleClickSort = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClickHome = () => {}
-
-  const handleClickUpPath = () => {}
   return (
     <ToolbarContainer>
       <div>
-        <IconButton onClick={handleClickHome}><HomeIcon /></IconButton>
-        <IconButton onClick={handleClickUpPath}><FaArrowTurnUp /></IconButton>
+        <IconButton onClick={() => dispatch(moveHome('/'))}><HomeIcon /></IconButton>
+        <IconButton onClick={() => dispatch(moveUp())}><FaArrowTurnUp /></IconButton>
       </div>
       <FilePathInput>{folderPath}</FilePathInput>
       <div>

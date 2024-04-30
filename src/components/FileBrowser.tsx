@@ -12,13 +12,14 @@ import { FileBrowserProps } from "../types/filebrowser.types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { setFiles } from "../redux/fileReducer";
+import { setFolderPath } from "../redux/folderReducer";
 
 type ShowType = 'list' | 'grid';
 
 export default function FileBrowser({ folderPath, fileData }:FileBrowserProps) {
   const dispatch = useDispatch();
   const fileList = useSelector((state: RootState) => state.fileData.value);
-
+  const currentFolder = useSelector((state: RootState) => state.folderData.value);
 
   const [fileShowState, setFileShowState] = useState<ShowType>('grid');
   const { handleContextMenuOpen } = useContext(MenuContext);
@@ -33,12 +34,13 @@ export default function FileBrowser({ folderPath, fileData }:FileBrowserProps) {
 
   useEffect(() => {
     dispatch(setFiles(fileData));
+    dispatch(setFolderPath(folderPath));
   }, []);
   
   return (
     <Box height={500} width={1000} p={2} sx={{ border: '1px solid grey', borderRadius: '4px' }}>
       <Stack sx={{ height: '100%'}}>
-        <FileToolbar folderPath={folderPath} handleShowListFile={handleShowListFile} handleShowGridFile={handleShowGridFile} />
+        <FileToolbar folderPath={currentFolder} handleShowListFile={handleShowListFile} handleShowGridFile={handleShowGridFile} />
         <div style={{ height: '100%'}} onContextMenu={handleContextMenuOpen}>
         {
           fileShowState === 'list' ? <FileList files={fileList} /> : <FileGrid files={fileList} />

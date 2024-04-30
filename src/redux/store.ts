@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import fileReducer from "./fileReducer";
+import folderReducer from "./folderReducer";
 
 export const store = configureStore({
   reducer: {
-    fileData: fileReducer
+    fileData: fileReducer,
+    folderData: folderReducer
   }
 })
 
